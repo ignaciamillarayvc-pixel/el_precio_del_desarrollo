@@ -1388,3 +1388,220 @@ figcaption {
   .barra ul { gap: 0.8rem; }
   .barra ul a { font-size: 0.86rem; }
 }
+
+/* =========================================================
+   REPRODUCTORES CON TEMÁTICA AMBIENTAL
+   (los crea js/reproductores.js; sin JS quedan los del navegador)
+   ========================================================= */
+.audio audio.oculto { display: none; }
+
+/* Botón con forma de hoja */
+.hoja-boton {
+  flex: none;
+  width: 3.1rem;
+  height: 3.1rem;
+  border: 0;
+  padding: 0;
+  border-radius: 0 50%;
+  background: var(--tono, var(--medianoche));
+  color: var(--beige);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: border-radius .25s ease, transform .25s ease, background-color .2s;
+}
+/* nervadura de la hoja */
+.hoja-boton::after {
+  content: "";
+  position: absolute;
+  left: 18%;
+  top: 18%;
+  width: 64%;
+  height: 64%;
+  background: linear-gradient(135deg, transparent 48%, rgba(247, 244, 213, 0.28) 49%, rgba(247, 244, 213, 0.28) 51%, transparent 52%);
+  pointer-events: none;
+}
+.hoja-boton svg { width: 1.35rem; height: 1.35rem; fill: currentColor; position: relative; z-index: 1; }
+.hoja-boton:hover { border-radius: 8% 50%; transform: rotate(-6deg); }
+.hoja-boton:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* ---------- Audio: la pradera ---------- */
+.pradera {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.pradera__campo {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 3.6rem;
+  cursor: pointer;
+  touch-action: none;
+  border-bottom: 2px solid rgba(10, 51, 35, 0.25);
+  border-radius: 2px;
+}
+.pradera__svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.pradera__seco { fill: rgba(10, 51, 35, 0.17); }
+.pradera__verde .flor { fill: var(--rosa); }
+.brizna { transform-box: fill-box; transform-origin: 50% 100%; }
+.pradera__tiempo {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+  min-width: 5.6rem;
+  text-align: right;
+}
+.pradera__error, .reproductor__error {
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+  color: #9E5A4F;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .audio.sonando .brizna { animation: mecer 2.4s ease-in-out infinite alternate; }
+  .audio.sonando .pradera__play { animation: latir 2.4s ease-in-out infinite; }
+}
+@keyframes mecer { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+@keyframes latir { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+
+/* Variante oscura: sonido ambiente del data center */
+.audio--ambiente .pradera__campo { border-bottom-color: rgba(247, 244, 213, 0.3); }
+.audio--ambiente .pradera__seco { fill: rgba(247, 244, 213, 0.2); }
+.audio--ambiente .pradera__tiempo { color: rgba(247, 244, 213, 0.8); }
+.audio--ambiente .hoja-boton { background: var(--rosa); color: var(--verde-oscuro); }
+.audio--ambiente .hoja-boton::after {
+  background: linear-gradient(135deg, transparent 48%, rgba(10, 51, 35, 0.25) 49%, rgba(10, 51, 35, 0.25) 51%, transparent 52%);
+}
+.audio--ambiente .pradera__error { color: var(--rosa); }
+.versus__grid .audio:last-child .hoja-boton { background: var(--rosa); color: var(--verde-oscuro); }
+
+/* ---------- Video: la enredadera ---------- */
+.reproductor {
+  --avance: 0%;
+  position: relative;
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: #000;
+}
+.reproductor video { display: block; width: 100%; border-radius: 0; cursor: pointer; }
+.reproductor:fullscreen { display: flex; align-items: center; }
+.reproductor:fullscreen video { height: 100%; aspect-ratio: auto; object-fit: contain; }
+
+.reproductor__grande {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(3.6rem, 12vw, 5.2rem);
+  height: clamp(3.6rem, 12vw, 5.2rem);
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: var(--beige);
+  color: var(--verde-oscuro);
+  box-shadow: 0 6px 24px rgba(10, 51, 35, 0.45);
+  z-index: 2;
+  transition: opacity .25s ease, border-radius .25s ease, transform .25s ease;
+}
+.reproductor__grande svg { width: 42%; height: 42%; }
+.reproductor__grande::after {
+  background: linear-gradient(135deg, transparent 48%, rgba(10, 51, 35, 0.18) 49%, rgba(10, 51, 35, 0.18) 51%, transparent 52%);
+}
+.reproductor__grande:hover { transform: translate(-50%, -50%) rotate(-8deg); }
+.reproductor.reproduciendo .reproductor__grande { opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .reproductor.cargando .reproductor__grande { opacity: 1; animation: brotar 1.2s ease-in-out infinite; pointer-events: none; }
+}
+@keyframes brotar {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.92) rotate(-8deg); }
+  50% { transform: translate(-50%, -50%) scale(1.04) rotate(8deg); }
+}
+
+.reproductor__barra {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 2.2rem 0.8rem 0.65rem;
+  background: linear-gradient(to top, rgba(10, 51, 35, 0.92), rgba(10, 51, 35, 0.55) 55%, transparent);
+  color: var(--beige);
+  transition: opacity .3s ease;
+}
+.reproductor.oculta .reproductor__barra { opacity: 0; }
+.reproductor.oculta { cursor: none; }
+.reproductor__btn {
+  flex: none;
+  width: 2.3rem;
+  height: 2.3rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--beige);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.reproductor__btn:hover { background: rgba(247, 244, 213, 0.16); }
+.reproductor__btn svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
+.reproductor__play { border-radius: 0 50%; background: var(--musgo); }
+.reproductor__play:hover { background: #95AB68; }
+.reproductor__tiempo {
+  flex: none;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.9;
+}
+
+/* El tallo: una enredadera que crece con el avance */
+.tallo {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 3rem;
+  height: 2rem;
+  cursor: pointer;
+  touch-action: none;
+}
+.tallo__linea {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: rgba(247, 244, 213, 0.35);
+  border-radius: 2px;
+}
+.tallo__avance {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: var(--avance);
+  height: 16px;
+  margin-top: -8px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='16' viewBox='0 0 28 16'%3E%3Cpath d='M0 8H28' stroke='%23A9BD7A' stroke-width='2.2'/%3E%3Cpath d='M7 8C7 4.2 10 1.6 14.5 1.4C14.5 5.4 11.4 8 7 8Z' fill='%23A9BD7A'/%3E%3Cpath d='M20 8C20 11.8 23 14.4 27.5 14.6C27.5 10.6 24.4 8 20 8Z' fill='%23839958'/%3E%3C/svg%3E") repeat-x left center / 28px 16px;
+}
+.tallo__hoja {
+  position: absolute;
+  top: 50%;
+  left: var(--avance);
+  width: 22px;
+  height: 22px;
+  transform: translate(-30%, -70%);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 21C3 10.5 9.5 3.5 21 3C21 14.5 14 21 3 21Z' fill='%23F7F4D5'/%3E%3Cpath d='M3.5 20.5L15 9' stroke='%23839958' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  pointer-events: none;
+}
+.tallo:focus-visible { outline: 3px solid var(--rosa); outline-offset: 2px; border-radius: 4px; }
+
+/* Videos verticales o pantallas angostas: barra más compacta */
+.video:not(.video--ancha) .reproductor__tiempo { display: none; }
+@media (max-width: 480px) {
+  .reproductor__tiempo { display: none; }
+  .reproductor__barra { gap: 0.35rem; padding-left: 0.5rem; padding-right: 0.5rem; }
+  .pradera { gap: 0.6rem; }
+  .pradera__tiempo { min-width: 0; font-size: 0.78rem; }
+  .hoja-boton { width: 2.7rem; height: 2.7rem; }
+}
