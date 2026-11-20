@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Nosotras | El precio del desarrollo</title>
+  <meta name="description" content="El equipo detrás de El precio del desarrollo: Constanza Higueras Troncoso e Ignacia Vallejos Collipal.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <link rel="preload" href="fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="pagina-nosotras">
+
+  <a class="saltar" href="#equipo">Saltar al contenido</a>
+  <div class="progreso" aria-hidden="true"><span></span></div>
+
+  <nav class="barra visible" aria-label="Secciones del reportaje">
+    <a class="barra__marca" href="index.html">El precio del desarrollo</a>
+    <ul>
+      <li><a href="index.html#san-antonio">San Antonio</a></li>
+      <li><a href="index.html#alto-maule">Alto Maule</a></li>
+      <li><a href="index.html#buin">Buin</a></li>
+      <li><a href="index.html#cierre">Una pregunta</a></li>
+      <li><a href="nosotras.html" aria-current="page">Nosotras</a></li>
+    </ul>
+  </nav>
+
+  <header class="nosotras-cabecera">
+    <div class="nosotras-cabecera__interior">
+      <h1>Nosotras</h1>
+      <!-- =====================================================================
+           PEGA_TEXTO_Presentacion (opcional)
+           Pueden reemplazar este párrafo por una presentación escrita por ustedes.
+           ===================================================================== -->
+      <p><i>El precio del desarrollo</i> es el proyecto de título de Constanza Higueras Troncoso e Ignacia Vallejos Collipal, de la carrera de Periodismo de la Universidad Autónoma de Chile, 2026.</p>
+    </div>
+  </header>
+
+  <main id="equipo">
+    <ul class="equipo">
+
+      <!-- =====================================================================
+           FOTO 1: CONSTANZA
+           Reemplaza PEGA_URL_Foto_Constanza por la dirección de la foto.
+           Puede ser una ruta del repositorio (ej: img/nosotras/constanza.jpg)
+           o un enlace completo (ej: https://.../constanza.jpg).
+           Medidas: 1200 x 1500 px (vertical, proporción 4:5), JPG de menos de 500 KB.
+           Mientras no haya foto, la página muestra las iniciales.
+           ===================================================================== -->
+      <li>
+        <figure class="persona">
+          <div class="persona__foto" data-iniciales="CH">
+            <img src="PEGA_URL_Foto_Constanza"
+                 alt="Retrato de Constanza Higueras Troncoso"
+                 width="1200" height="1500" loading="lazy"
+                 onerror="this.hidden = true">
+          </div>
+          <figcaption>
+            <b>Constanza Higueras Troncoso</b>
+            <span>Periodismo, Universidad Autónoma de Chile</span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <!-- =====================================================================
+           FOTO 2: IGNACIA
+           Reemplaza PEGA_URL_Foto_Ignacia por la dirección de la foto.
+           Mismas medidas: 1200 x 1500 px (vertical, 4:5), JPG de menos de 500 KB.
+           ===================================================================== -->
+      <li>
+        <figure class="persona">
+          <div class="persona__foto" data-iniciales="IV">
+            <img src="PEGA_URL_Foto_Ignacia"
+                 alt="Retrato de Ignacia Vallejos Collipal"
+                 width="1200" height="1500" loading="lazy"
+                 onerror="this.hidden = true">
+          </div>
+          <figcaption>
+            <b>Ignacia Vallejos Collipal</b>
+            <span>Periodismo, Universidad Autónoma de Chile</span>
+          </figcaption>
+        </figure>
+      </li>
+
+    </ul>
+
+    <p class="nosotras-volver"><a href="index.html">Leer el reportaje</a></p>
+  </main>
+
+  <footer class="pie">
+    <div class="pie__bloque">
+      <h2 class="pie__titulo">El precio del desarrollo</h2>
+      <p>Reportaje de Constanza Higueras Troncoso e Ignacia Vallejos Collipal.</p>
+      <p>Proyecto de título, carrera de Periodismo, Universidad Autónoma de Chile, 2026.</p>
+    </div>
+    <div class="pie__bloque"></div>
+    <div class="pie__enlaces">
+      <a href="index.html">Volver al reportaje</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
